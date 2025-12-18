@@ -1,0 +1,51 @@
+import pandas as pd
+import numpy as np
+from faker import Faker
+import random
+
+fake = Faker('en_IN')
+
+# Number of records
+n = 5000
+
+# Static values
+cities = ['Chennai', 'Bangalore', 'Hyderabad', 'Mumbai', 'Delhi']
+restaurants = ['Dominos', 'KFC', 'McDonalds', 'Burger King', 'Subway',
+               'Pizza Hut', 'Faasos', 'Paradise Biryani']
+cuisines = ['Indian', 'Chinese', 'Italian', 'Fast Food', 'Desserts']
+payment_modes = ['UPI', 'Credit Card', 'Debit Card', 'Cash']
+order_status = ['Delivered', 'Cancelled']
+
+data = []
+
+for i in range(1, n + 1):
+    order_date = fake.date_between(start_date='-1y', end_date='today')
+    status = random.choices(order_status, weights=[85, 15])[0]
+
+    delivery_time = (
+        random.randint(20, 60) if status == 'Delivered' else None
+    )
+
+    order_value = random.randint(150, 1500)
+
+    data.append({
+        'Order_ID': i,
+        'Order_Date': order_date,
+        'City': random.choice(cities),
+        'Restaurant': random.choice(restaurants),
+        'Cuisine': random.choice(cuisines),
+        'Customer_ID': fake.uuid4(),
+        'Delivery_Partner_ID': fake.uuid4(),
+        'Order_Value': order_value,
+        'Delivery_Time_Minutes': delivery_time,
+        'Order_Status': status,
+        'Payment_Mode': random.choice(payment_modes)
+    })
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Save to CSV
+df.to_csv('Food_Delivery_Data.csv', index=False)
+
+print("Food Delivery dataset created successfully!")
