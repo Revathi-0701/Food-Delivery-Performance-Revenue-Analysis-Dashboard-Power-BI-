@@ -1,0 +1,2 @@
+# Food-Delivery-Performance-Revenue-Analysis-Dashboard-Power-BI-
+Designed and developed an interactive Power BI dashboard to analyze food delivery operations, focusing on order volume, revenue trends, delivery performance, and customer behavior. The dashboard helps business stakeholders monitor daily operations, peak demand periods, and service efficiency to improve customer satisfaction and profitability.
